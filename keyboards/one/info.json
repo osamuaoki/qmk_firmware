@@ -1,0 +1,12 @@
+{
+    "keyboard_name": "one",
+    "url": "",
+    "maintainer": "osamuaoki",
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"label": "k00", "x": 0, "y": 0}
+            ]
+        }
+    }
+}
