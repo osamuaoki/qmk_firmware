@@ -2,11 +2,11 @@
 
 ![cgc56](imgur.com image replace me!)
 
-*Cartesian Grid Compact 56 Keyboard*
+*Cartesian Grid (Compact) 56 Keyboard*
 
 * Keyboard Maintainer: [Osamu Aoki <osamu@debian.org>](https://github.com/osamuaoki)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+* Hardware Supported: AT90USB1286 based teensy++ like board with LUFA bootloader
+* Hardware Availability: https://github.com/osamuaoki/cg56 (rev#2)
 
 Make example for this keyboard (after setting up your build environment):
 

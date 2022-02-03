@@ -1,20 +1,21 @@
 // Copyright 2022 Osamu Aoki <osamu@debian.org> (@osamuaoki)
 // SPDX-License-Identifier: GPL-2.0-or-later
+// vim:se tw=78 sts=4 ts=24 sw=4 et ai:
 
 #pragma once
 
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID    0xFEED
-#define PRODUCT_ID   0x0000
-#define DEVICE_VER   0x0001
-#define MANUFACTURER osamuaoki
-#define PRODUCT      cgc56
+//#define VENDOR_ID    0xFEED
+//#define PRODUCT_ID   0x0000
+//#define DEVICE_VER   0x0001
+//#define MANUFACTURER osamuaoki
+//#define PRODUCT      cgc56
 
 /* key matrix size */
-#define MATRIX_ROWS 2
-#define MATRIX_COLS 3
+//#define MATRIX_ROWS 8
+//#define MATRIX_COLS 7
 
 /*
  * Keyboard Matrix Assignments
@@ -26,25 +27,55 @@
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
-#define MATRIX_ROW_PINS { D0, D5 }
-#define MATRIX_COL_PINS { F1, F0, B0 }
-#define UNUSED_PINS
+//#define MATRIX_ROW_PINS { B7, D0, D1, D2, D3, D4, D5, D7 }
+//#define MATRIX_COL_PINS { E0, E1, C0, C1, C2, C3, C4 }
+//#define UNUSED_PINS
 
 /* COL2ROW, ROW2COL */
-#define DIODE_DIRECTION COL2ROW
+//#define DIODE_DIRECTION COL2ROW
+// COL2ROW: COL=INPUT(pull-upped) ROW=OUTPUT(normally high)
 
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
-#define SOFT_SERIAL_PIN D0  // or D1, D2, D3, E6
+// NOT APPLICABLE so comment out to be clear
+// #define SOFT_SERIAL_PIN D0  // or D1, D2, D3, E6
 
-//#define LED_NUM_LOCK_PIN B0
-//#define LED_CAPS_LOCK_PIN B1
-//#define LED_SCROLL_LOCK_PIN B2
-//#define LED_COMPOSE_PIN B3
-//#define LED_KANA_PIN B4
+// ////////////////////////////////////////////////////////////////
+// LED for POWER, RAISE, LOWER, ... (turn on only 4 or less)
+//   LED[1:4][R:B] = { B6,  B5,  F6,  F7,  F4,  F5,  C7,  C5}
+//                     Q/R  Q/B  T/R  T/B  Y/R  Y/B  P/R  P/B
+//                     (Don't enable JTAG if F5-F7 is used)
+#define LED_Q_RED_PIN B6
+#define LED_Q_BLU_PIN B5
+#define LED_T_RED_PIN F6
+#define LED_T_BLU_PIN F7
+#define LED_Y_RED_PIN F4
+#define LED_Y_BLU_PIN F5
+#define LED_P_RED_PIN C7
+#define LED_P_BLU_PIN C5
+//   INTERNAL LED       = { D6 }
+// ////////////////////////////////////////////////////////////////
+//
+// sort-of #define LED_CAPS_LOCK_PIN LED_Q_RED_PIN
+#define LED_CAPS_LOCK_PIN F6
+// sort-of #define LED_NUM_LOCK_PIN LED_T_RED_PIN
+#define LED_NUM_LOCK_PIN F4
+// sort-of #define LED_SCROLL_LOCK_PIN LED_Y_RED_PIN
+//#define LED_SCROLL_LOCK_PIN F4
+// unix kb
+//#define LED_COMPOSE_PIN F4
+// japanese kb
+//#define LED_KANA_PIN F4
 
-//#define BACKLIGHT_PIN B7
+// taken from planck
+//   Sound[0] = { C6 } (OCR3A, Timer 3, channel A, 16 bits)
+#define QMK_SPEAKER C6
+#define AUDIO_VOICES
+#define AUDIO_PIN C6
+#define AUDIO_CLICKY
+
+//#define BACKLIGHT_PIN B5
 //#define BACKLIGHT_LEVELS 3
 //#define BACKLIGHT_BREATHING
 
@@ -77,7 +108,7 @@
 //#endif
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
+//#define DEBOUNCE 5
 
 /* define if matrix has ghost (lacks anti-ghosting diodes) */
 //#define MATRIX_HAS_GHOST
@@ -129,10 +160,24 @@
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
 
+/* enable retro tapping */
+#define RETRO_TAPPING
+
 /* disable these deprecated features by default */
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 
 /* Bootmagic Lite key configuration */
-//#define BOOTMAGIC_LITE_ROW 0
-//#define BOOTMAGIC_LITE_COLUMN 0
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 0
+
+// auto shift
+//#define AUTO_SHIFT_TIMEOUT 150
+//#define NO_AUTO_SHIFT_NUMERIC
+//#define NO_AUTO_SHIFT_SPECIAL
+
+// no reentering
+#define DYNAMIC_MACRO_NO_NESTING
+
+// COMBO Q+P for MO(_FN5)
+#define COMBO_COUNT 1
