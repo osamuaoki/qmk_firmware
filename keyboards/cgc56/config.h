@@ -161,7 +161,7 @@
 //#define NO_ACTION_ONESHOT
 
 /* enable retro tapping */
-#define RETRO_TAPPING
+// #define RETRO_TAPPING
 
 /* disable these deprecated features by default */
 #define NO_ACTION_MACRO
