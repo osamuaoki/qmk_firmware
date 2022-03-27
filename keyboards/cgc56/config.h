@@ -160,6 +160,10 @@
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
 
+/* tap term per key */
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
+
 /* enable retro tapping */
 // #define RETRO_TAPPING
 
@@ -179,5 +183,7 @@
 // no reentering
 #define DYNAMIC_MACRO_NO_NESTING
 
-// COMBO Q+P for MO(_FN5)
+// COMBO P+Q for MO(_FN5)
 #define COMBO_COUNT 1
+
+#define DEBUG_ACTION

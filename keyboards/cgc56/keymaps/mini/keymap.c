@@ -6,9 +6,9 @@
 
 // This is a programmable keyboard with 10 layers:
 // * 2 choices for the default layer (_BL1, _BL2)
-// * 4 temporary top layers (_FL1, _FL2, _FL3, _FL4)
-// * 3 locked top layers (_FL5, _FL6, _FL7)
-//     * Access via: CK_LL5, CK_LL6, CK_LL7, CK_UNLK
+// * 2 temporary top layers (_FL1, _FL2)
+// * 2 locked top layers (_FL3, _FL4)
+//     * Access via: CK_LL3, CK_LL4, CK_UNLK
 // * LEDs are lit according to the effective layer
 //
 enum layer_names {
@@ -16,19 +16,15 @@ enum layer_names {
     _BL2, // QWFRTY alternative
     _FL1, // Layer: F1-F10, 1-0, symbols
     _FL2, // Layer: F1-F10, 1-0, symbols (almost duplicate)
-    _FL3, // Layer: cursor keys
-    _FL4, // Layer: cursor keys (almost duplicate)
-    _FL5, // Layer: cursor keys (almost duplicate) -- locked
-    _FL6, // numpad                                -- locked
-    _FL7  // internal configuration                -- locked
+    _FL3, // numpad                                -- locked
+    _FL4  // internal configuration                -- locked
 };
 
 // All custom keycodes are after SAFE_RANGE
 enum custom_keycodes {
     // lock-layers
-    CK_LL5 = SAFE_RANGE,
-    CK_LL6,
-    CK_LL7,
+    CK_LL3 = SAFE_RANGE,
+    CK_LL4,
     // unlock lock-layers
     CK_UNLK,
     // set default layer
@@ -36,10 +32,6 @@ enum custom_keycodes {
     CK_BL2,
     // ESC+CTRL_SPC (vim NORMAL MODE and set to English mode)
     CK_EENG,
-    // ESC+TAB (input completion in mc/bash)
-    CK_ETAB,
-    // F4+UNLK (F4 to start mc editor mode with default layer)
-    CK_UNF4
 };
 
 // define C macro for scripting aesthetics (7 chars max)
@@ -54,8 +46,8 @@ enum custom_keycodes {
 #define RA_H MT(MOD_RALT, KC_H)
 #define LG_J MT(MOD_LGUI, KC_J)
 #define LA_K MT(MOD_LALT, KC_K)
-#define LC_L MT(MOD_LCTL, KC_L)
-#define LS_SCLN MT(MOD_LSFT, KC_SCLN)
+#define RC_L MT(MOD_RCTL, KC_L)
+#define RS_SCLN MT(MOD_RSFT, KC_SCLN)
 //   --- QWFRTY
 #define LC_I MT(MOD_LCTL, KC_I)
 #define LA_U MT(MOD_LALT, KC_U)
@@ -73,16 +65,12 @@ enum custom_keycodes {
 #define RA_6 MT(MOD_RALT, KC_6)
 #define LG_7 MT(MOD_LGUI, KC_7)
 #define LA_8 MT(MOD_LALT, KC_8)
-#define LC_9 MT(MOD_LCTL, KC_9)
-#define LS_0 MT(MOD_LSFT, KC_0)
+#define RC_9 MT(MOD_RCTL, KC_9)
+#define RS_0 MT(MOD_RSFT, KC_0)
 
 // Momentarily Layer, Layer-Tap for thumb keys
 #define K1_SPC LT(_FL1, KC_SPC)
 #define K2_SPC LT(_FL2, KC_SPC)
-//#define MO3 MO(_FL3)
-#define MO3 LT(_FL3, KC_ESC)
-//#define MO4 MO(_FL4)
-#define MO4 LT(_FL4, KC_BSPC)
 
 // Select one of US/JP/ISO
 //      KEYCODE HEX     us      US      iso     ISO     jis     JIS     かな
@@ -94,21 +82,33 @@ enum custom_keycodes {
 //      KC_INT4  8A                                     変換
 //      KC_INT5  8B                                     無変換
 //
-// US keyboard
+//#define KBDTYPE_US
+#define KBDTYPE_USJP
+//#define KBDTYPE_USISO
+#ifdef KBDTYPE_US
+// US only keyboard
 #define KC_XXX1 XXXXXXX
 #define KC_XXX2 XXXXXXX
-#define KC_SXX1 XXXXXXX
-#define KC_SXX2 XXXXXXX
-// JP keyboard
-//#define KC_XXX1 KC_INT1
-//#define KC_XXX2 KC_INT3
-//#define KC_SXX1 LSFT(KC_INT1)
-//#define KC_SXX2 LSFT(KC_INT3)
+#define KC_XXX3 XXXXXXX
+#define KC_XXX4 XXXXXXX
+#define KC_XXX5 XXXXXXX
+#endif
+#ifdef KBDTYPE_USJP
+// US and JP keyboard
+#define KC_XXX1 KC_INT1
+#define KC_XXX2 KC_INT2
+#define KC_XXX3 KC_INT3
+#define KC_XXX4 KC_INT4
+#define KC_XXX5 KC_INT5
+#endif
+#ifdef KBDTYPE_USISO
 // ISO keyboard
-//#define KC_XXX1 KC_NUHS
-//#define KC_XXX2 KC_NUBS
-//#define KC_SXX1 LSFT(KC_NUHS)
-//#define KC_SXX2 LSFT(KC_NUBS)
+#define KC_XXX1 KC_NUHS
+#define KC_XXX2 XXXXXXX
+#define KC_XXX3 KC_NUBS
+#define KC_XXX4 XXXXXXX
+#define KC_XXX5 XXXXXXX
+#endif
 
 // For unlock caps ???
 #define LS_CAPS LSFT(KC_CAPS)
@@ -133,40 +133,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * QWERTY -- for normal typing
      *
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │ Q │ W │ E │ R │ T │Ins│Cap│Num│Del│ Y │ U │ I │ O │ P │
+     * │Esc│ Q │ W │ E │ R │ T │Ins│Del│ Y │ U │ I │ O │ P │Bs │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ A │ S │ D │ F │ G │ ￩ │PL1│PL2│ ￫ │ H │ J │ K │ L │ ; │
+     * │Tab│ A │ S │ D │ F │ G │ ￩ │ ￫ │ H │ J │ K │ L │ ; │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ Z │ X │ C │ V │ B │ ￪ │RE1│RE2│ ￬ │ N │ M │ , │ . │ / │
+     * │Sft│ Z │ X │ C │ V │ B │ ￪ │ ￬ │ N │ M │ , │ . │ / │Sft│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Spc│GUI│LL6│MO3│Sp1│Tab│Spc│Spc│Ent│En2│MO4│LL5│APP│Spc│
+     * │Ctl│Gui│Alt│LL3│Esc│Sp1│Tab│Ent│En2│Bs │Psc│AGr│App│Crl│
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_BL1] = LAYOUT(
-            KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_INS,  KC_CAPS, KC_NUM,  KC_DEL,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-            LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_LEFT, DM_PLY1, DM_PLY2, KC_RGHT, RA_H,    LG_J,    LA_K,    LC_L,    LS_SCLN,
-            KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_UP,   DM_REC1, DM_REC2, KC_DOWN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
-            KC_SPC,  KC_LGUI, CK_LL6,  MO3,     K1_SPC,  KC_TAB,  KC_SPC,  KC_SPC,  KC_ENT,  K2_SPC,  MO4,     CK_LL5,  KC_APP,  KC_SPC
+            KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_INS,  KC_DEL,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+            KC_TAB,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_LEFT, KC_RGHT, RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
+            KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_UP,   KC_DOWN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+            KC_LCTL, KC_LGUI, KC_LALT, CK_LL3,  KC_ESC,  K1_SPC,  KC_TAB,  KC_ENT,  K2_SPC,  KC_BSPC, KC_PSCR, KC_RALT, KC_APP,  KC_RCTL
             ),
 
     /* ****************************************************************************************************************************************
      * QWFRTY -- for romaji-optimized typing in (n)vim
      *
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │ Q │ W │ F │ R │ T │Ins│Cap│Num│Del│ Y │ D │ K │ G │ P │
+     * │Esc│ Q │ W │ F │ R │ T │Ins│Del│ Y │ D │ K │ G │ P │Bs │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ A │ I │ U │ E │ O │ ￩ │PL1│PL2│ ￫ │ S │ H │ J │ L │ ; │
+     * │Tab│ A │ I │ U │ E │ O │ ￩ │ ￫ │ S │ H │ J │ L │ ; │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ Z │ X │ C │ V │ B │ ￪ │RE1│RE2│ ￬ │ N │ M │ , │ . │ / │
+     * │Sft│ Z │ X │ C │ V │ B │ ￪ │ ￬ │ N │ M │ , │ . │ / │Sft│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Spc│GUI│LL6│MO3│Sp1│Tab│Spc│Spc│Ent│En2│MO4│LL5│APP│Spc│
+     * │Ctl│Gui│Alt│LL3│Esc│Sp1│Tab│Ent│En2│Bs │Psc│AGr│App│Crl│
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_BL2] = LAYOUT(
-            KC_Q,    KC_W,    KC_F,    KC_R,    KC_T,    KC_INS,  KC_CAPS, KC_NUM,  KC_DEL,  KC_Y,    KC_D,    KC_K,    KC_G,    KC_P,
-            LS_A,    LC_I,    LA_U,    LG_E,    RA_O,    KC_LEFT, DM_PLY1, DM_PLY2, KC_RGHT, RA_S,    LG_H,    LA_J,    LC_L,    LS_SCLN,
-            KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_UP,   DM_REC1, DM_REC2, KC_DOWN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
-            KC_SPC,  KC_LGUI, CK_LL6,  MO3,     K1_SPC,  KC_TAB,  KC_SPC,  KC_SPC,  KC_ENT,  K2_SPC,  MO4,     CK_LL5,  KC_APP,  KC_SPC
+            KC_ESC,  KC_Q,    KC_W,    KC_F,    KC_R,    KC_T,    KC_INS,  KC_DEL,  KC_Y,    KC_D,    KC_K,    KC_G,    KC_P,    KC_BSPC,
+            KC_TAB,  LS_A,    LC_I,    LA_U,    LG_E,    RA_O,    KC_LEFT, KC_RGHT, RA_S,    LG_H,    LA_J,    RC_L,    RS_SCLN, KC_ENT,
+            KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_UP,   KC_DOWN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+            KC_LCTL, KC_LGUI, KC_LALT, CK_LL3,  KC_ESC,  K1_SPC,  KC_TAB,  KC_ENT,  K2_SPC,  KC_BSPC, KC_PSCR, KC_RALT, KC_APP,  KC_RCTL
             ),
 
     /* ****************************************************************************************************************************************
@@ -176,107 +176,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *     MidH Normal shifted number keys
      *     MidL Normal number keys
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │F1 │F2 │F3 │F4 │F5 │F11│Cap│Num│F12│F6 │F7 │F8 │F9 │F10│
+     * │Esc│F1 │F2 │F3 │F4 │F5 │F11│F12│F6 │F7 │F8 │F9 │F10│Bs │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ 1 │ 2 │ 3 │ 4 │ 5 │Hom│***│***│End│ 6 │ 7 │ 8 │ 9 │ 0 │
+     * │Tab│ 1 │ 2 │ 3 │ 4 │ 5 │Hom│End│ 6 │ 7 │ 8 │ 9 │ 0 │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Cap│ ~ │   │ - │ = │PgU│***│***│PgD│ [ │ ] │ \ │   │ ' │
+     * │Sft│Cap│ ~ │ー │ - │ = │PgU│PgD│ [ │ ] │ \ │ろ │ ' │Sft│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │***│***│***│Esc│Spc│Tab│Spc│Spc│Ent│Spc│Bs │***│***│***│
+     * │***│***│***│LL4│Esc│LL3│xx5│xx4│Psc│xx2│Mut│***│***│***│
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL1] = LAYOUT(
-            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,  _______, _______, KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
-            LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    KC_HOME, _______, _______, KC_END,  RA_6,    LG_7,    LA_8,    LC_9,    LS_0,
-            LS_CAPS, KC_GRV,  KC_XXX1, KC_MINS, KC_EQL,  KC_PGUP, _______, _______, KC_PGDN, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX2, KC_QUOT,
-            _______, _______, _______, XXXXXXX, vvvvvvv, XXXXXXX, _______, _______, KC_ENT,  KC_SPC,  KC_BSPC, _______, _______, _______
+            _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,  KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
+            _______, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    KC_HOME, KC_END,  RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    _______,
+            _______, LS_CAPS, KC_GRV,  KC_XXX3, KC_MINS, KC_EQL,  KC_PGUP, KC_PGDN, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX1, KC_QUOT, _______,
+            _______, _______, _______, CK_LL4,  CK_EENG, vvvvvvv, KC_XXX5, KC_XXX4, KC_PSCR, KC_XXX2, KC_MUTE, _______, _______, _______
             ),
     [_FL2] = LAYOUT(
-            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,  _______, _______, KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
-            LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    KC_HOME, _______, _______, KC_END,  RA_6,    LG_7,    LA_8,    LC_9,    LS_0,
-            LS_CAPS, KC_GRV,  KC_XXX1, KC_MINS, KC_EQL,  KC_PGUP, _______, _______, KC_PGDN, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX2, KC_QUOT,
-            _______, _______, _______, CK_EENG, KC_SPC,  KC_TAB,  _______, _______, XXXXXXX, vvvvvvv, XXXXXXX, _______, _______, _______
-            ),
-
-    /* ****************************************************************************************************************************************
-     * Cursor layer (temporary and locked) and macro
-     *     Right highs: cursors
-     *     High Function keys F11-F12 (left)
-     *     MidH Layer/mod operation (left)
-     *     MidL extra symbol keys
-     *     (Center columns Cursor keys)
-     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │F11│F12│   │F4e│   │***│***│***│***│PgU│Hm │ ￪ │End│Ins│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │BL1│BL2│LL7│LL6│LL5│***│***│***│***│PgD│ ￩ │ ￬ │ ￫ │Del│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │RC1│RC2│PL1│PL2│   │***│***│***│***│Tab│Psc│Scr│Pau│App│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │***│***│***│vvv│UNL│***│***│***│***│   │vvv│***│***│***│
-     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
-     */
-    [_FL3] = LAYOUT(
-            KC_F11,  KC_F12,  KC_F3,   CK_UNF4, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_INS,
-            KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CK_LL5,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,
-            DM_REC1, DM_REC2, DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,  KC_PSCR, KC_SCRL, KC_PAUS, KC_APP,
-            _______, _______, _______, vvvvvvv, KC_SPC,  CK_ETAB, KC_SPC,  KC_SPC,  KC_ENT,  KC_SPC,  KC_BSPC, _______, _______, _______
-            ),
-    [_FL4] = LAYOUT(
-            KC_F11,  KC_F12,  KC_F3,   CK_UNF4, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_INS,
-            CK_BL1,  CK_BL2,  CK_LL7,  CK_LL6,  CK_LL5,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT,
-            DM_REC1, DM_REC2, DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,  KC_PSCR, KC_SCRL, KC_PAUS, KC_APP,
-            _______, _______, _______, CK_EENG, KC_SPC,  CK_ETAB, KC_SPC,  KC_SPC,  KC_ENT,  KC_SPC,  vvvvvvv, _______, _______, _______
-            ),
-    [_FL5] = LAYOUT(
-            KC_F1,   KC_F2,   KC_F3,   CK_UNF4, KC_F5,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_INS,
-            KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,  KC_PSCR, KC_SCRL, KC_PAUS, KC_APP,
-            _______, _______, _______, CK_EENG, CK_UNLK, CK_ETAB, KC_SPC,  KC_SPC,  KC_ENT,  KC_SPC,  KC_BSPC, _______, _______, _______
+            _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,  KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
+            _______, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    KC_HOME, KC_END,  RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    _______,
+            _______, LS_CAPS, KC_GRV,  KC_XXX3, KC_MINS, KC_EQL,  KC_PGUP, KC_PGDN, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX1, KC_QUOT, _______,
+            _______, _______, _______, CK_LL4,  CK_EENG, CK_LL3,  KC_XXX5, KC_XXX4, vvvvvvv, KC_XXX2, KC_MUTE, _______, _______, _______
             ),
 
     /* ****************************************************************************************************************************************
      * Numpad locked layer: Numpad/media
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │___│___│___│___│___│___│___│___│Num│ - │ 7 │ 8 │ 9 │BS │
+     * │___│Mut│Vup│Vdn│BL1│BL2│Psc│Num│ - │ 7 │ 8 │ 9 │BS │___│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │___│___│___│___│___│___│___│___│Cal│ * │ 4 │ 5 │ 6 │ + │
+     * │___│Sft│Ctl│Alt│Gui│LL4│Scr│Cal│ * │ 4 │ 5 │ 6 │ + │___│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │___│___│___│___│___│___│___│___│ = │ / │ 1 │ 2 │ 3 │PEn│
+     * │___│RE1│RE2│PL1│PL2│APP│Pau│ = │ / │ 1 │ 2 │ 3 │PEn│___│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │___│___│___│___│___│___│___│___│Ent│   │ 0 │ , │ . │PEn│
+     * │___│___│___│___│___│___│___│Ent│ . │ 0 │ 0 │ . │PEn│___│
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      * All off-main area (numpad etc.)
      */
-    [_FL6] = LAYOUT(
-            XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, KC_CAPS, KC_NUM,  KC_NUM,  KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_BSPC,
-            KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, KC_CALC, KC_PAST, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PEQL, KC_PSLS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT,
-            _______, _______, _______, KC_ESC,  CK_UNLK, KC_TAB,  KC_SPC,  KC_SPC,  KC_ENT,  KC_SPC,  KC_KP_0, KC_COMM, KC_PDOT, KC_PENT
+    [_FL3] = LAYOUT(
+            _______, KC_MUTE, KC_VOLD, KC_VOLU, CK_BL1,  CK_BL2,  KC_PSCR, KC_NUM,  KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_BSPC, _______,
+            _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CK_LL4,  KC_SCRL, KC_CALC, KC_PAST, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
+            _______, DM_REC1, DM_REC2, DM_PLY1, DM_PLY2, KC_APP,  KC_PAUS, KC_PEQL, KC_PSLS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, _______,
+            _______, _______, _______, _______, KC_ESC,  CK_UNLK, KC_TAB,  KC_ENT,  KC_PDOT, KC_KP_0, KC_KP_0, KC_PDOT, KC_PENT, _______
             ),
 
     /* ****************************************************************************************************************************************
      * Internal
      */
-    [_FL7] = LAYOUT(
-            EC_TOGG, XXXXXXX, CK_ON,   NK_ON,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DB_TOGG, EE_CLR,  QK_BOOT,
-            XXXXXXX, XXXXXXX, CK_OFF,  NK_OFF,  CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-            _______, _______, _______, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    [_FL4] = LAYOUT(
+            _______, EC_TOGG, XXXXXXX, CK_ON,   NK_ON,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DB_TOGG, EE_CLR,  QK_BOOT, _______,
+            _______, XXXXXXX, XXXXXXX, CK_OFF,  NK_OFF,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+            _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+            _______, _______, _______, _______, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
             ),
 
 };
-
-
-
-// turn on Numlock at start
-void numlock_on(void) {
-  led_t led_state = host_keyboard_led_state();
-  bool b = led_state.num_lock;
-  if (!b) {
-      register_code(KC_NUMLOCK);
-      unregister_code(KC_NUMLOCK);
-  }
-}
 
 // There is a limit for total DC current of IC to be 200 mA. (or 100mA for
 // each port group, 40mA for each PIN).
@@ -291,22 +243,23 @@ void numlock_on(void) {
 void fn_led_blinks(uint8_t blinks) {
     for (uint8_t n = 0; n < blinks; n++) {
         fn_led_of(LED_P_RED_PIN);
+        fn_led_of(LED_Q_RED_PIN);
         wait_ms(50);
         fn_led_on(LED_P_RED_PIN);
+        fn_led_on(LED_Q_RED_PIN);
         wait_ms(150);
     }
+    fn_led_of(LED_P_RED_PIN);
+    fn_led_of(LED_Q_RED_PIN);
     return;
 }
 
 void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
+  // Customize these values to desired behavior
   debug_enable=true;
   debug_matrix=true;
   debug_keyboard=true;
   //debug_mouse=true;
-
-  // turn on NumLock
-  numlock_on();
 }
 
 // Continuous LED on/off indicates highest active layer
@@ -315,7 +268,7 @@ void keyboard_post_init_user(void) {
 layer_state_t layer_state_set_kb(layer_state_t orig_state) {
     layer_state_t state = layer_state_set_user(orig_state);
     // check from MSB -> LSB
-    if (state & (1L << _FL7))
+    if (state & (1L << _FL4))
     {
         // B*___* R*..*
         fn_led_on(LED_Q_BLU_PIN);
@@ -324,43 +277,15 @@ layer_state_t layer_state_set_kb(layer_state_t orig_state) {
         fn_led_on(LED_P_BLU_PIN);
         fn_led_on(LED_Q_RED_PIN);
         fn_led_on(LED_P_RED_PIN);
-    } else if (state & (1L << _FL6))
-    {
-        // B_*** R*.._
-        fn_led_of(LED_Q_BLU_PIN);
-        fn_led_on(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_on(LED_P_BLU_PIN);
-        fn_led_on(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
-    } else if (state & (1L << _FL5))
-    {
-        // B***_ R_..*
-        fn_led_on(LED_Q_BLU_PIN);
-        fn_led_on(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_of(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_on(LED_P_RED_PIN);
-    //////////////////////////////
-    } else if (state & (1L << _FL4))
-    {
-        // B__** R_.._
-        fn_led_of(LED_Q_BLU_PIN);
-        fn_led_of(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_on(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
     } else if (state & (1L << _FL3))
     {
-        // B**__ R_.._
-        fn_led_on(LED_Q_BLU_PIN);
+        // B_**_ R*..*
+        fn_led_of(LED_Q_BLU_PIN);
         fn_led_on(LED_T_BLU_PIN);
-        fn_led_of(LED_Y_BLU_PIN);
+        fn_led_on(LED_Y_BLU_PIN);
         fn_led_of(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
+        fn_led_on(LED_Q_RED_PIN);
+        fn_led_on(LED_P_RED_PIN);
     } else if (state & (1L << _FL2))
     {
         // B__*_ R_..*
@@ -414,14 +339,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_BL1:
             if (record->event.pressed)
             {
+                fn_led_blinks(1);
+                // normal setting
+                set_single_persistent_default_layer(_BL1);
                 // just to be safe side
                 layer_on(_BL1);
                 layer_off(_BL2);
                 layer_off(_FL3);
-                layer_off(_FL5);
-                // normal setting
-                set_single_persistent_default_layer(_BL1);
-                fn_led_blinks(1);
+                layer_off(_FL4);
             }
             return false;
             break;
@@ -429,8 +354,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_BL2:
             if (record->event.pressed)
             {
-                set_single_persistent_default_layer(_BL2);
                 fn_led_blinks(2);
+                // normal setting
+                set_single_persistent_default_layer(_BL2);
+                // just to be safe side
+                layer_off(_BL1);
+                layer_on(_BL2);
+                layer_off(_FL3);
+                layer_off(_FL4);
             }
             return false;
             break;
@@ -438,39 +369,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_UNLK:
             if (record->event.pressed)
             {
-                layer_off(_FL5);
-                layer_off(_FL6);
-                layer_off(_FL7);
+                layer_off(_BL1);
+                layer_off(_BL2);
+                layer_off(_FL3);
+                layer_off(_FL4);
             }
             return false;
             break;
 
-        case CK_LL5:
+        case CK_LL3:
             if (record->event.pressed)
             {
-                layer_on(_FL5);
-                layer_off(_FL6);
-                layer_off(_FL7);
+                layer_on(_FL3);
+                layer_off(_FL4);
             }
             return false;
             break;
 
-        case CK_LL6:
+        case CK_LL4:
             if (record->event.pressed)
             {
-                layer_on(_FL6);
-                layer_off(_FL5);
-                layer_off(_FL7);
-            }
-            return false;
-            break;
-
-        case CK_LL7:
-            if (record->event.pressed)
-            {
-                layer_on(_FL7);
-                layer_off(_FL5);
-                layer_off(_FL6);
+                layer_on(_FL4);
+                layer_off(_FL3);
             }
             return false;
             break;
@@ -504,36 +424,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
             break;
 
-        case CK_ETAB:
-            if (record->event.pressed)
-            {
-                register_code(KC_ESC);
-            }
-            else
-            {
-                unregister_code(KC_ESC);
-                // mc focused trick
-                register_code(KC_TAB);
-                unregister_code(KC_TAB);
-            }
-            return false;
-            break;
-
-        case CK_UNF4:
-            if (record->event.pressed)
-            {
-                register_code(KC_F4);
-            }
-            else
-            {
-                unregister_code(KC_F4);
-                layer_off(_FL5);
-                layer_off(_FL6);
-                layer_off(_FL7);
-            }
-            return false;
-            break;
-
         default:
             break;
 
@@ -542,30 +432,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 // Combo to access to boot (w/o erasing memory)
-const uint16_t PROGMEM qp_combo[] = {KC_Q, KC_P, COMBO_END};
+const uint16_t PROGMEM combos[] = {KC_Q, KC_P, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(qp_combo, QK_BOOT),
+    COMBO(combos, QK_BOOT),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // slow tapping for weak fingers
         case MT(MOD_LSFT, KC_A):
-        case MT(MOD_LSFT, KC_SCLN):
-        case MT(MOD_LALT, KC_D):
-        case MT(MOD_LALT, KC_U):
+        case MT(MOD_RSFT, KC_SCLN):
+        case MT(MOD_LALT, KC_D): // osamu special
+        case MT(MOD_LALT, KC_U): // osamu special
         case MT(MOD_LSFT, KC_1):
-        case MT(MOD_LSFT, KC_0):
-        case MT(MOD_LALT, KC_3):
+        case MT(MOD_RSFT, KC_0):
+        case MT(MOD_LALT, KC_3): // osamu special
             return TAPPING_TERM * 2;
         // thumbs are fast
         case LT(_FL1, KC_SPC):
         case LT(_FL2, KC_SPC):
-        case LT(_FL3, KC_ESC):
-        case LT(_FL4, KC_BSPC):
-            return TAPPING_TERM;
+            return TAPPING_TERM * 3 / 4;
         default:
-            return TAPPING_TERM * 3 / 2;
+            return TAPPING_TERM;
     }
 };
 
