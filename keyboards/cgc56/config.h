@@ -183,7 +183,7 @@
 // no reentering
 #define DYNAMIC_MACRO_NO_NESTING
 
-// COMBO P+Q for MO(_FN5)
+// COMBO P+Q for QK_BOOT
 #define COMBO_COUNT 1
 
 #define DEBUG_ACTION
