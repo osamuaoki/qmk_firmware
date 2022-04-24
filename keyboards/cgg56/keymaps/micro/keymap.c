@@ -63,6 +63,11 @@ enum custom_keycodes {
 #define LA_8 MT(MOD_LALT, KC_8)
 #define RC_9 MT(MOD_RCTL, KC_9)
 #define RS_0 MT(MOD_RSFT, KC_0)
+// side
+#define LC_ESC MT(MOD_LCTL, KC_ESC)
+#define LS_INS MT(MOD_LSFT, KC_INS)
+#define RC_ENT MT(MOD_RCTL, KC_ENT)
+#define RS_DEL MT(MOD_RSFT, KC_DEL)
 
 // Momentarily Layer, Layer-Tap for thumb keys
 #define K1_SPC LT(_FL1, KC_SPC)
@@ -142,8 +147,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_BL1] = LAYOUT(
             KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    XXXXXXX, XXXXXXX, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-            KC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    XXXXXXX, XXXXXXX, RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
-            KC_INS,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
+            LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    XXXXXXX, XXXXXXX, RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, RC_ENT,
+            LS_INS,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RS_DEL,
             XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_UP,   K1_SPC,  KC_LEFT, KC_RGHT, K2_SPC,  KC_DOWN, KC_BTN3, KC_BTN2, KC_BTN1, XXXXXXX
             ),
 
@@ -387,10 +392,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // slow tapping for weak fingers
         case MT(MOD_LSFT, KC_A):
         case MT(MOD_RSFT, KC_SCLN):
-        case MT(MOD_LALT, KC_D): // osamu special
-        case MT(MOD_LALT, KC_U): // osamu special
         case MT(MOD_LSFT, KC_1):
         case MT(MOD_RSFT, KC_0):
+        case MT(MOD_LSFT, KC_ESC):
+        case MT(MOD_LCTL, KC_INS):
+        case MT(MOD_RSFT, KC_ENT):
+        case MT(MOD_RCTL, KC_DEL):
+        case MT(MOD_LALT, KC_D): // osamu special
         case MT(MOD_LALT, KC_3): // osamu special
             return TAPPING_TERM * 2;
         // thumbs are fast
