@@ -144,20 +144,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* ****************************************************************************************************************************************
      * Numpad locked layer: Numpad/media
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │Pau│F13│F14│F15│F16│F17│   │   │ - │ 7 │ 8 │ 9 │BS │Num│
+     * │Tab│   │   │Psc│ScL│Pau│   │   │ - │ 7 │ 8 │ 9 │BS │Num│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ScL│Sft│Ctl│Alt│Gui│APP│   │   │ * │ 4 │ 5 │ 6 │ + │Cal│
+     * │Esc│Sft│Ctl│Alt│Gui│   │   │   │ * │ 4 │ 5 │ 6 │ + │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Psc│F18│F19│F20│F21│F22│   │   │ / │ 1 │ 2 │ 3 │PEn│ = │
+     * │App│   │   │   │   │   │   │   │ / │ 1 │ 2 │ 3 │PEn│Cal│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │LL4│ULK│LL3│Ent│ . │ 0 │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      * All off-main area (numpad etc.)
      */
     [_FL3] = LAYOUT(
-            KC_PAUS, KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  XXXXXXX, XXXXXXX, KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_BSPC, KC_NUM,
-            KC_SCRL, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_APP,  XXXXXXX, XXXXXXX, KC_PAST, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_CALC,
-            KC_PSCR, KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  XXXXXXX, XXXXXXX, KC_PSLS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, KC_PEQL,
+            KC_TAB,  XXXXXXX, XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS, XXXXXXX, XXXXXXX, KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_BSPC, KC_NUM,
+            KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAST, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_ENT,
+            KC_APP,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSLS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, KC_CALC,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_LL4,  CK_UNLK, CK_LL3,  KC_ENT,  KC_PDOT, KC_KP_0, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
@@ -165,9 +165,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Internal and muse locked layer: mouse keys (mostly useless)
      */
     [_FL4] = LAYOUT(
-            KC_ENT,  EC_TOGG, DB_TOGG, CK_ON,   NK_ON,   KC_VOLU, XXXXXXX, XXXXXXX, KC_WH_U, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
+            KC_TAB,  EC_SWAP, DB_TOGG, CK_ON,   NK_ON,   KC_VOLU, XXXXXXX, XXXXXXX, KC_WH_U, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
             KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_L, KC_BTN1, KC_MS_R, KC_WH_R, KC_ACL1,
-            KC_APP,  XXXXXXX, EE_CLR,  CK_OFF,  NK_OFF,  KC_VOLD, XXXXXXX, XXXXXXX, KC_WH_D, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
+            KC_APP,  EC_NORM, EE_CLR,  CK_OFF,  NK_OFF,  KC_VOLD, XXXXXXX, XXXXXXX, KC_WH_D, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_LL4,  CK_UNLK, CK_LL3,  KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
