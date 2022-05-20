@@ -62,13 +62,13 @@ enum custom_keycodes {
 #define RS_0 MT(MOD_RSFT, KC_0)
 // left side one hand moves (ZZ, ^A, ^Z, ^X, ^C, ^V, ^B)
 #define LC_ESC MT(MOD_LCTL, KC_ESC)
-#define LS_INS MT(MOD_LSFT, KC_INS)
+#define LS_MUTE MT(MOD_LSFT, KC_MUTE)
 
 // Momentarily Layer, Layer-Tap for thumb keys
 #define K1_SPC LT(_FL1, KC_SPC)
 #define K2_SPC LT(_FL2, KC_SPC)
 
-// Select one of US/JP/ISO
+// Odd keys and effects under US/JP/ISO
 //      KEYCODE HEX     us      US      iso     ISO     jis     JIS     かな
 //      KC_NUHS  32     \       |       #       ~       ]       }
 //      KC_NUBS  64     <       >       \       |
@@ -78,32 +78,6 @@ enum custom_keycodes {
 //      KC_INT4  8A                                     変換
 //      KC_INT5  8B                                     無変換
 //
-//Uncomment one
-//#define KBDTYPE_US
-#define KBDTYPE_USJP
-//#define KBDTYPE_USISO
-//
-#ifdef KBDTYPE_US
-// US only keyboard
-#define KC_XXX1 KC_PIPE
-#define KC_XXX3 KC_UNDS
-#define KC_XXX4 LCTL(KC_SPC)
-#define KC_XXX5 LSFT(KC_SPC)
-#endif
-#ifdef KBDTYPE_USJP
-// US and JP keyboard
-#define KC_XXX1 KC_INT1
-#define KC_XXX3 KC_INT3
-#define KC_XXX4 KC_INT4
-#define KC_XXX5 KC_INT5
-#endif
-#ifdef KBDTYPE_USISO
-// ISO keyboard
-#define KC_XXX1 KC_NUHS
-#define KC_XXX3 KC_NUBS
-#define KC_XXX4 LCTL(KC_SPC)
-#define KC_XXX5 LSFT(KC_SPC)
-#endif
 
 // TRANS (pressed)
 #define vvvvvvv KC_TRNS
@@ -126,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
      * │Esc│ A │ S │ D │ F │ G │   │   │ H │ J │ K │ L │ ; │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Ins│ Z │ X │ C │ V │ B │   │   │ N │ M │ , │ . │ / │Del│
+     * │Mut│ Z │ X │ C │ V │ B │   │   │ N │ M │ , │ . │ / │Psc│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │ ￪ │Sp1│ ￩ │ ￫ │Sp2│ ￬ │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
@@ -134,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BL1] = LAYOUT(
             KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    XXXXXXX, XXXXXXX, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
             LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    XXXXXXX, XXXXXXX, RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
-            LS_INS,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
+            LS_MUTE, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   K1_SPC,  KC_LEFT, KC_RGHT, K2_SPC,  KC_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
@@ -149,22 +123,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
      * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │   │   │ 6 │ 7 │ 8 │ 9 │ 0 │3/4│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │M/P│ ` │EEs│ー │ - │ = │   │   │ [ │ ] │ \ │ろ │ ' │xx2│
+     * │NUB│ ` │EEs│ー │ - │ = │   │   │ [ │ ] │ \ │ろ │ ' │NUS│
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │PgU│xx5│Hom│End│xx4│PgD│   │   │   │   │
+     * │   │   │   │   │PgU│Ins│Hom│End│Del│PgD│   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL1] = LAYOUT(
             KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX, XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
             KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX, XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    CK_LL3,
-            KC_DEL,  KC_GRV,  CK_EENG, KC_XXX3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX1, KC_QUOT, KC_MUTE,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, vvvvvvv, KC_HOME, KC_END,  KC_XXX4, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            KC_NUBS, KC_GRV,  CK_EENG, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, KC_NUHS,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, vvvvvvv, KC_HOME, KC_END,  KC_DEL,  KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
     [_FL2] = LAYOUT(
             KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX, XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
             KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX, XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    CK_LL4,
-            KC_DEL,  KC_GRV,  CK_EENG, KC_XXX3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_XXX1, KC_QUOT, KC_MUTE,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, KC_XXX5, KC_HOME, KC_END,  vvvvvvv, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            KC_NUBS, KC_GRV,  CK_EENG, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, KC_NUHS,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, KC_INS,  KC_HOME, KC_END,  vvvvvvv, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
@@ -419,7 +393,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case MT(MOD_LSFT, KC_1):
         case MT(MOD_RSFT, KC_0):
         case MT(MOD_LSFT, KC_ESC):
-        case MT(MOD_LCTL, KC_INS):
+        case MT(MOD_LCTL, KC_MUTE):
         case MT(MOD_LALT, KC_D): // osamu special
         case MT(MOD_LALT, KC_3): // osamu special
             return TAPPING_TERM * 2;
