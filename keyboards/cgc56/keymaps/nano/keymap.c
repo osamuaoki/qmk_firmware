@@ -165,9 +165,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Internal and muse locked layer: mouse keys (mostly useless)
      */
     [_FL4] = LAYOUT(
-            KC_TAB,  EC_SWAP, DB_TOGG, CK_ON,   NK_ON,   KC_VOLU, XXXXXXX, XXXXXXX, KC_WH_U, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
+            KC_TAB,  EC_SWAP, EC_TOGG, CK_ON,   NK_ON,   KC_VOLU, XXXXXXX, XXXXXXX, KC_WH_U, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
             KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_L, KC_BTN1, KC_MS_R, KC_WH_R, KC_ACL1,
-            KC_APP,  EC_NORM, EE_CLR,  CK_OFF,  NK_OFF,  KC_VOLD, XXXXXXX, XXXXXXX, KC_WH_D, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
+            KC_APP,  EC_NORM, XXXXXXX, CK_OFF,  NK_OFF,  KC_VOLD, XXXXXXX, XXXXXXX, KC_WH_D, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_LL4,  CK_UNLK, CK_LL3,  KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
@@ -380,9 +380,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 // Combo to access to boot (w/o erasing memory)
-const uint16_t PROGMEM combos[] = {KC_Q, KC_P, COMBO_END};
+const uint16_t PROGMEM combos_pq[] = {KC_Q, KC_P, COMBO_END};
+const uint16_t PROGMEM combos_dt[] = {KC_TAB, KC_DEL, COMBO_END};
+const uint16_t PROGMEM combos_db[] = {KC_D, KC_B, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combos, QK_BOOT),
+    COMBO(combos_pq, QK_BOOT),
+    COMBO(combos_dt, EE_CLR),
+    COMBO(combos_db, DB_TOGG),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {

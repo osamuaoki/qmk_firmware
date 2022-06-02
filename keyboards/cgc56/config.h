@@ -164,8 +164,13 @@
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 
-/* enable retro tapping */
-// #define RETRO_TAPPING
+/* Select MOD TAP to behave like default LAYER TAP (non-default) */
+/* This is needed for home position mod keymaps */
+#define IGNORE_MOD_TAP_INTERRUPT
+/* Both LAYER TAP and MOD TAP can be rolling-pressed within TAPPING_TERM */
+/* This is optional to accommodate the fast typer */
+/* This is enabled by default if TAPPING_TERM >= 500 */
+#define PERMISSIVE_HOLD
 
 /* disable these deprecated features by default */
 #define NO_ACTION_MACRO
@@ -183,7 +188,7 @@
 // no reentering
 #define DYNAMIC_MACRO_NO_NESTING
 
-// COMBO P+Q for QK_BOOT
-#define COMBO_COUNT 1
+// COMBO P+Q for QK_BOOT etc.
+#define COMBO_COUNT 3
 
 #define DEBUG_ACTION
