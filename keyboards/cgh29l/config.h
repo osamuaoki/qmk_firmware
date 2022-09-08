@@ -11,7 +11,7 @@
 //#define PRODUCT_ID   0x0000
 //#define DEVICE_VER   0x0001
 //#define MANUFACTURER osamuaoki
-//#define PRODUCT      cgg56
+//#define PRODUCT      cgh29l
 
 /* key matrix size */
 //#define MATRIX_ROWS 4
@@ -106,9 +106,9 @@
 //#define MATRIX_HAS_GHOST
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
+//#define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
+//#define LOCKING_RESYNC_ENABLE
 
 /* If defined, GRAVE_ESC will always act as ESC when CTRL is held.
  * This is useful for the Windows task manager shortcut (ctrl+shift+esc).
@@ -153,11 +153,7 @@
 //#define NO_ACTION_ONESHOT
 
 /* enable retro tapping */
-#define RETRO_TAPPING
-
-/* disable these deprecated features by default */
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
+//#define RETRO_TAPPING
 
 /* Bootmagic Lite key configuration */
 #define BOOTMAGIC_LITE_ROW 0
@@ -169,8 +165,8 @@
 //#define NO_AUTO_SHIFT_SPECIAL
 
 // no reentering
-#define DYNAMIC_MACRO_NO_NESTING
+//#define DYNAMIC_MACRO_NO_NESTING
 
 // COMBO Q+P for MO(_FN5)
-#define COMBO_COUNT 1
+//#define COMBO_COUNT 1
 
