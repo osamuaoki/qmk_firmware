@@ -7,15 +7,15 @@
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-//#define VENDOR_ID    0xFEED
-//#define PRODUCT_ID   0x0000
-//#define DEVICE_VER   0x0001
-//#define MANUFACTURER osamuaoki
-//#define PRODUCT      cgs58
+#define VENDOR_ID    0xFEED
+#define PRODUCT_ID   0x0000
+#define DEVICE_VER   0x0001
+#define MANUFACTURER osamuaoki
+#define PRODUCT      cgs58
 
 /* key matrix size */
-//#define MATRIX_ROWS 4
-//#define MATRIX_COLS 14
+#define MATRIX_ROWS 8  // Rows are doubled-up
+#define MATRIX_COLS 8
 
 /*
  * Keyboard Matrix Assignments
@@ -29,12 +29,15 @@
  */
 
 // A9-A12 can't be used (USB conflict) for I/O
-//#define MATRIX_ROW_PINS { B12, B13, B14, B15 }
-//#define MATRIX_COL_PINS { B6, B5, B4, B3, A15, B8, A8, A3, A2, A1, A0, B7, C15, C14 }
+#define MATRIX_ROW_PINS { B12, B13, B14, B15 }
+#define MATRIX_COL_PINS { A8, B8, B3, A15, B9, B4, B5, C14 }
+
+#define MATRIX_ROW_PINS_RIGHT { B12, B13, B14, B15 }
+#define MATRIX_COL_PINS_RIGHT { A6, A3, A2, A1, A4, A5, C15, C14 }
 //#define UNUSED_PINS
 
 /* COL2ROW, ROW2COL */
-//#define DIODE_DIRECTION COL2ROW
+#define DIODE_DIRECTION COL2ROW
 // COL2ROW: COL=INPUT(pull-upped) ROW=OUTPUT(normally high)
 
 /*
@@ -100,7 +103,7 @@
 //#endif
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-//#define DEBOUNCE 5
+#define DEBOUNCE 5
 
 /* define if matrix has ghost (lacks anti-ghosting diodes) */
 //#define MATRIX_HAS_GHOST
@@ -158,6 +161,8 @@
 /* Bootmagic Lite key configuration */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
+#define BOOTMAGIC_LITE_ROW_RIGHT    7
+#define BOOTMAGIC_LITE_COLUMN_RIGHT 0
 
 // auto shift
 //#define AUTO_SHIFT_TIMEOUT 150
@@ -169,4 +174,31 @@
 
 // COMBO Q+P for MO(_FN5)
 //#define COMBO_COUNT 1
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// in col2row col is input, and row is output
+// #define SPLIT_HAND_MATRIX_GRID A10, A4
+//
+// Ground B10 with 68kohm to indicate it is right side
+#define SPLIT_HAND_PIN              B10
+
+/* connection */
+// https://github.com/qmk/qmk_firmware/blob/master/docs/serial_driver.md#choosing-a-driver-subsystem
+#define SERIAL_USART_FULL_DUPLEX   // Enable full duplex operation mode.
+#define SOFT_SERIAL_PIN B6     // USART TX pin
+#define SERIAL_USART_RX_PIN B7     // USART RX pin
+#define SERIAL_USART_TX_PIN SOFT_SERIAL_PIN     // USART TX pin
+
+#define SELECT_SOFT_SERIAL_SPEED 1 // or 0, 2, 3, 4, 5
+                                   //  0: 460800 baud
+                                   //  1: 230400 baud (default)
+                                   //  2: 115200 baud
+                                   //  3: 57600 baud
+                                   //  4: 38400 baud
+                                   //  5: 19200 baud
+#define SERIAL_USART_DRIVER SD1    // USART driver of TX and RX pin. default: SD1
+#define SERIAL_USART_TX_PAL_MODE 7 // Pin "alternate function", see the respective datasheet for the appropriate values for your MCU. default: 7
+#define SERIAL_USART_RX_PAL_MODE 7 // Pin "alternate function", see the respective datasheet for the appropriate values for your MCU. default: 7
+#define SERIAL_USART_TIMEOUT 20    // USART driver timeout. default 20
+
 

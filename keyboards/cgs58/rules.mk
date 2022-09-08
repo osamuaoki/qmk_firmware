@@ -19,6 +19,9 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 
+SPLIT_KEYBOARD = yes
+# split settings https://github.com/qmk/qmk_firmware/blob/master/docs/serial_driver.md
+SERIAL_DRIVER = usart
 
 VIA_ENABLE = no
 # customized for osamu-keymap
