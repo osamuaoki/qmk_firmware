@@ -1,7 +1,7 @@
 {
-    "keyboard_name": "cgh29l",
+    "keyboard_name": "cgh29r",
     "manufacturer":"osamuaoki",
-    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgh29l",
+    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgh29r",
     "maintainer": "Osamu Aoki <osamu@debian.org>",
     "usb": {
         "vid": "0xFEED",
@@ -11,7 +11,7 @@
     "debounce": 5,
     "diode_direction":"COL2ROW",
         "matrix_pins": {
-        "cols": [ "A8", "B8", "B3", "A15", "B9", "B4", "B5", "C14" ],  
+        "cols": [ "A3", "A2", "A1", "A4", "A5", "C15", "C14", "A6" ],  
         "rows": [ "B12", "B13", "B14", "B15" ]
 	},
     "layouts": {
