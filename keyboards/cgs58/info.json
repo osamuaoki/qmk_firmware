@@ -1,7 +1,7 @@
 {
     "keyboard_name": "cgh29l",
     "manufacturer":"osamuaoki",
-    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgh29l",
+    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgs58",
     "maintainer": "Osamu Aoki <osamu@debian.org>",
     "usb": {
         "vid": "0xFEED",

@@ -11,7 +11,7 @@
 //#define PRODUCT_ID   0x0000
 //#define DEVICE_VER   0x0001
 //#define MANUFACTURER osamuaoki
-//#define PRODUCT      cgh29l
+//#define PRODUCT      cgs58
 
 /* key matrix size */
 //#define MATRIX_ROWS 4
