@@ -161,8 +161,10 @@
 /* Bootmagic Lite key configuration */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
-#define BOOTMAGIC_LITE_ROW_RIGHT    7
-#define BOOTMAGIC_LITE_COLUMN_RIGHT 0
+// right top row = 4
+#define BOOTMAGIC_LITE_ROW_RIGHT    4
+// right most column = 15
+#define BOOTMAGIC_LITE_COLUMN_RIGHT 15
 
 // auto shift
 //#define AUTO_SHIFT_TIMEOUT 150
@@ -179,8 +181,9 @@
 // in col2row col is input, and row is output
 // #define SPLIT_HAND_MATRIX_GRID A10, A4
 //
-// Ground B10 with 68kohm to indicate it is right side
+// Ground B10 with 10kohm to grand indicate it is left side
 #define SPLIT_HAND_PIN              B10
+#define SPLIT_HAND_PIN_LOW_IS_LEFT
 
 /* connection */
 // https://github.com/qmk/qmk_firmware/blob/master/docs/serial_driver.md#choosing-a-driver-subsystem
