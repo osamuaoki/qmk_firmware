@@ -234,11 +234,11 @@ void keyboard_post_init_user(void) {
   set_single_persistent_default_layer(_BL1);
 }
 
-// Continuous LED on/off indicates highest active layer
+// Continuous LED on/off indicates highest active layer for every matrix scan
 // 4 BLUE LEDs and 1 RED LED used
 // Other RED pins are for Caps/Scroll/Num Locks
-layer_state_t layer_state_set_kb(layer_state_t orig_state) {
-    layer_state_t state = layer_state_set_user(orig_state);
+void matrix_scan_user(void) {
+    layer_state_t state = layer_state;
     // check from MSB -> LSB
     if (state & (1L << _FL4))
     {
@@ -286,7 +286,6 @@ layer_state_t layer_state_set_kb(layer_state_t orig_state) {
         fn_led_of(LED_Q_RED_PIN);
         fn_led_of(LED_P_RED_PIN);
     }
-    return state ;
 }
 
 // define macro actions for mouse keys
