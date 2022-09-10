@@ -28,5 +28,3 @@
 }
 
 
-#define fn_led_of(x) writePinHigh(x)
-#define fn_led_on(x) writePinLow(x)

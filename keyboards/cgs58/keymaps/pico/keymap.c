@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 // vim:se tw=128 sts=4 ts=24 sw=4 et ai:
 #include QMK_KEYBOARD_H
-#include "wait.h"
 
 // This is a programmable keyboard with 6 layers:
 // * 1 default layer (_BL1)
@@ -198,27 +197,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-// There is a limit for total DC current of IC to be 200 mA. (or 100mA for
-// each port group, 40mA for each PIN).
-//
-// I have 4 of 2-color LEDs with each limiting to 18mA, turning all of them
-// cause to consume 144 mA.
-
-// LED_P_RED_PIN is used for indicating keyboard internal state
-// Its blinks indicate default layer to be used when it is set
-// Other RED pins are for Caps/Scroll/Num Locks
-
-void fn_led_blinks(uint8_t blinks) {
-    for (uint8_t n = 0; n < blinks; n++) {
-        fn_led_of(LED_BLUE);
-        wait_ms(50);
-        fn_led_on(LED_BLUE);
-        wait_ms(150);
-    }
-    fn_led_of(LED_BLUE);
-    return;
-}
-
 void keyboard_post_init_user(void) {
   // Customize these values to desired behavior
   debug_enable=true;
@@ -230,36 +208,67 @@ void keyboard_post_init_user(void) {
   set_single_persistent_default_layer(_BL1);
 }
 
+void fn_led(pin_t pin, bool flag) {
+    if (flag) {
+        writePinLow(pin); // ON
+    } else {
+        writePinHigh(pin); // OFF
+    }
+}
+
+// blink (ms) 
+#define BLINK_ON  1000
+#define BLINK_OFF 500
+#include "sync_timer.h"
+
 // Continuous LED on/off indicates highest active layer for every matrix scan
 void matrix_scan_user(void) {
-    layer_state_t state = layer_state;
+    static uint16_t key_timer = 0;
+    bool flag;
+    if (timer_elapsed(key_timer) < BLINK_ON)
+    {
+        flag = true;
+    } else if (timer_elapsed(key_timer) < ( BLINK_ON + BLINK_OFF) )
+    {
+        flag = false;
+    } else {
+        key_timer = timer_read();
+        flag = true;
+    }
     // check from MSB -> LSB
-    if (state & (1L << _FL4))
-    {
-        fn_led_of(LED_BLUE);
-    } else if (state & (1L << _FL3))
-    {
-        fn_led_of(LED_BLUE);
-    } else if (state & (1L << _FL2))
-    {
+    if (layer_state & (1L << _FL4))
+    {   // mouse
+        fn_led(LED_BLUE, flag);
+
+    } else if (layer_state & (1L << _FL3))
+    {   // numpad
         if (is_keyboard_left())
         {
-            fn_led_of(LED_BLUE);
+            fn_led(LED_BLUE, true);
         } else {
-            fn_led_on(LED_BLUE);
+            fn_led(LED_BLUE, flag);
         }
 
-    } else if (state & (1L << _FL1))
+    } else if (layer_state & (1L << _FL2))
     {
         if (is_keyboard_left())
         {
-            fn_led_on(LED_BLUE);
+            fn_led(LED_BLUE, true);
         } else {
-            fn_led_of(LED_BLUE);
+            fn_led(LED_BLUE, false);
+        }
+
+    } else if (layer_state & (1L << _FL1))
+    {
+        if (is_keyboard_left())
+        {
+            fn_led(LED_BLUE, false);
+        } else {
+            fn_led(LED_BLUE, true);
         }
     } else // No-Fn pressed
     {
-        fn_led_on(LED_BLUE);
+        fn_led(LED_BLUE, true);
     }
 }
 
@@ -276,7 +285,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_UNLK:
             if (record->event.pressed)
             {
-                fn_led_blinks(1);
                 layer_off(_FL3);
                 layer_off(_FL4);
             }
@@ -285,7 +293,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_LL3:
             if (record->event.pressed)
             {
-                fn_led_blinks(2);
                 layer_on(_FL3);
                 layer_off(_FL4);
             }
@@ -294,7 +301,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_LL4:
             if (record->event.pressed)
             {
-                fn_led_blinks(4);
                 layer_on(_FL4);
                 layer_off(_FL3);
             }
