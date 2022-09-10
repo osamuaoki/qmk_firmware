@@ -5,7 +5,7 @@
 *Cartesian Grid (Compact) 56 Keyboard*
 
 * Keyboard Maintainer: [Osamu Aoki <osamu@debian.org>](https://github.com/osamuaoki)
-* Hardware Supported: AT90USB1286 based teensy++ like board with LUFA bootloader
+* Hardware Supported: AT90USB1286 based teensy++ like board with LUFA HID bootloader
 * Hardware Availability: https://github.com/osamuaoki/cg56 (rev#2)
 
 Make example for this keyboard (after setting up your build environment):
@@ -22,6 +22,6 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 
 Enter the bootloader in 3 ways:
 
-* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
-* **Keycode in layout**: Press the key mapped to `RESET` if it is available
+* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key) and plug in the keyboard
+* **Physical reset button**: Briefly press the button on the back of the PCB -- for cgc56, there is a hole at the bottom of case to access it
+* **Keycode in layout**: Press the key mapped to `RESET` if it is available -- for cgc56, combo of Q-P
