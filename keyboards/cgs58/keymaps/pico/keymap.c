@@ -103,24 +103,23 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* ****************************************************************************************************************************************
-     * QWERTY -- for normal typing
+     * Baseline -- for normal typing
      *     KC_INT4 and KC_INT5 are for the JIS user
-     *
-     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │Tab│ Q │ W │ E │ R │ T │   │   │ Y │ U │ I │ O │ P │Bs │
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Esc│ A │ S │ D │ F │ G │   │   │ H │ J │ K │ L │ ; │Ent│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Mut│ Z │ X │ C │ V │ B │   │   │ N │ M │ , │ . │ / │Psc│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │MUH│Sp1│   │   │Sp1│HEN│   │   │   │   │
-     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+     * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
+     * │Tab│ Q │ W │ E │ R │ T │   │               │   │ Y │ U │ I │ O │ P │BS │
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │Esc│ A │ S │ D │ F │ G │   │               │   │ H │ J │ K │ L │ ; │Ent│
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │Mut│ Z │ X │ C │ V │ B │   │               │   │ N │ M │ , │ . │ / │Psc│
+     * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │MUH│Sp1│   │   │       │   │   │Sp1│HEN│   │   │   │   │
+     * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_BL1] = LAYOUT(
-            KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_F5,   KC_F10,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-            LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_F6,   KC_F9,   RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
-            LS_MUTE, KC_Z,    KC_X,    LG_C,    K2_V,    KC_B,    KC_F7,   KC_F8,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
-            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_INT5, K1_SPC,  KC_INS,  KC_DEL,  K1_SPC,  KC_INT4, CK_LL3,  CK_LL4,  KC_F11,  KC_F12
+            KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_F5,                     KC_F10,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+            LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_F6,                     KC_F9,   RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
+            LS_MUTE, KC_Z,    KC_X,    LG_C,    K2_V,    KC_B,    KC_F7,                     KC_F8,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
+            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_INT5, K1_SPC,  KC_INS,  XXXXXXX, XXXXXXX, KC_DEL,  K1_SPC,  KC_INT4, CK_LL3,  CK_LL4,  KC_F11,  KC_F12
             ),
 
     /* ****************************************************************************************************************************************
@@ -130,71 +129,71 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *     MidL Odd symbol keys
      *     KC_INT1, KC_INT2, and KC_INT3 are for the JIS user
      *     KC_NUBS and KC_NUHS are for the ISO user
-     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │F11│F1 │F2 │F3 │F4 │F5 │   │   │F6 │F7 │F8 │F9 │F10│F12│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │   │   │ 6 │ 7 │ 8 │ 9 │ 0 │LL3│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │App│ ` │NUB│ー │ - │ = │   │   │ [ │ ] │ \ │ろ │ ' │LL4│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │NUH│vvv│   │   │vvv│KAN│   │   │   │   │
-     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+     * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
+     * │F11│F1 │F2 │F3 │F4 │F5 │   │               │   │F6 │F7 │F8 │F9 │F10│F12│
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │   │               │   │ 6 │ 7 │ 8 │ 9 │ 0 │LL3│
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │App│ ` │NUB│ー │ - │ = │   │               │   │ [ │ ] │ \ │ろ │ ' │LL4│
+     * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │NUH│vvv│   │   │       │   │   │vvv│KAN│   │   │   │   │
+     * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL1] = LAYOUT(
-            KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX, XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX, XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    CK_LL3,
-            KC_APP,  KC_GRV,  KC_NUBS, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL4,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NUHS, vvvvvvv, XXXXXXX, XXXXXXX, vvvvvvv, KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX,                   XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
+            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX,                   XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    CK_LL3,
+            KC_APP,  KC_GRV,  KC_NUBS, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX,                   XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL4,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NUHS, vvvvvvv, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, vvvvvvv, KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * _FL2
      * Cursor
-     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │   │   │   │   │App│   │   │   │Ins│PgU│Up │PgD│Del│   │
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │Sft│Ctl│Alt│Gui│   │   │   │Hom│Lft│Dow│Rgt│End│   │
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │Gui│vvv│   │   │   │cU │aP │Tab│aN │cR │   │
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   │Spc│   │   │Spc│   │   │   │   │   │
-     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+     * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
+     * │   │   │   │   │App│   │   │               │   │Ins│PgU│Up │PgD│Del│   │
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │   │Sft│Ctl│Alt│Gui│   │   │               │   │Hom│Lft│Dow│Rgt│End│   │
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │Gui│vvv│   │   │               │   │cU │aP │Tab│aN │cR │   │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │   │Spc│   │   │       │   │   │Spc│   │   │   │   │   │
+     * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL2] = LAYOUT(
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  XXXXXXX,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  XXXXXXX,
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, vvvvvvv, XXXXXXX, XXXXXXX, XXXXXXX, KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, XXXXXXX,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                   XXXXXXX, KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  XXXXXXX,
+            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  XXXXXXX,
+            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, vvvvvvv, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, XXXXXXX,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * Numpad (locked layer)
-     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │   │   │   │Psc│ScL│Pau│   │   │Num│ 7 │ 8 │ 9 │ * │BS │
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │Sft│Ctl│Alt│Gui│   │   │   │ / │ 4 │ 5 │ 6 │ + │PEn│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │UNL│   │   │   │ 0 │ 1 │ 2 │ 3 │ - │Cal│
-     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   │UNL│   │   │ . │   │   │   │   │   │
-     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+     * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
+     * │   │   │   │Psc│ScL│Pau│   │               │   │Num│ 7 │ 8 │ 9 │ * │BS │
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │   │Sft│Ctl│Alt│Gui│   │   │               │   │ / │ 4 │ 5 │ 6 │ + │PEn│
+     * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │UNL│   │   │               │   │ 0 │ 1 │ 2 │ 3 │ - │Cal│
+     * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │   │UNL│   │   │       │   │   │ . │   │   │   │   │   │
+     * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      * All off-main area (numpad etc.)
      */
     [_FL3] = LAYOUT(
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS, XXXXXXX, XXXXXXX, KC_NUM,  KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, KC_BSPC,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PENT,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PMNS, KC_CALC,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, KC_PDOT, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
+            XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS, XXXXXXX,                   XXXXXXX, KC_NUM,  KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, KC_BSPC,
+            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PENT,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PMNS, KC_CALC,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PDOT, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * Internal and mouse locked layer: mouse keys are mostly useless
      */
     [_FL4] = LAYOUT(
-            XXXXXXX, EC_SWAP, CK_ON,   NK_ON,   KC_APP,  KC_VOLU, XXXXXXX, XXXXXXX, KC_BTN3, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_L, KC_BTN1, KC_MS_R, KC_WH_R, KC_ACL1,
-            XXXXXXX, EC_NORM, CK_OFF,  NK_OFF,  CK_UNLK, KC_VOLD, XXXXXXX, XXXXXXX, KC_BTN2, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, KC_BTN1, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
+            XXXXXXX, EC_SWAP, CK_ON,   NK_ON,   KC_APP,  KC_VOLU, XXXXXXX,                   XXXXXXX, KC_BTN3, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
+            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE, XXXXXXX,                   XXXXXXX, KC_WH_L, KC_MS_L, KC_BTN1, KC_MS_R, KC_WH_R, KC_ACL1,
+            XXXXXXX, EC_NORM, CK_OFF,  NK_OFF,  CK_UNLK, KC_VOLD, XXXXXXX,                   XXXXXXX, KC_BTN2, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN1, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
             ),
 
 };
@@ -211,15 +210,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void fn_led_blinks(uint8_t blinks) {
     for (uint8_t n = 0; n < blinks; n++) {
-        fn_led_of(LED_P_RED_PIN);
-        fn_led_of(LED_Q_RED_PIN);
+        fn_led_of(LED_BLUE);
         wait_ms(50);
-        fn_led_on(LED_P_RED_PIN);
-        fn_led_on(LED_Q_RED_PIN);
+        fn_led_on(LED_BLUE);
         wait_ms(150);
     }
-    fn_led_of(LED_P_RED_PIN);
-    fn_led_of(LED_Q_RED_PIN);
+    fn_led_of(LED_BLUE);
     return;
 }
 
@@ -234,59 +230,42 @@ void keyboard_post_init_user(void) {
   set_single_persistent_default_layer(_BL1);
 }
 
-// Continuous LED on/off indicates highest active layer
-// 4 BLUE LEDs and 1 RED LED used
-// Other RED pins are for Caps/Scroll/Num Locks
-layer_state_t layer_state_set_kb(layer_state_t orig_state) {
-    layer_state_t state = layer_state_set_user(orig_state);
+// Continuous LED on/off indicates highest active layer for every matrix scan
+void matrix_scan_user(void) {
+    layer_state_t state = layer_state;
     // check from MSB -> LSB
     if (state & (1L << _FL4))
     {
-        // B*___* R*..*
-        fn_led_on(LED_Q_BLU_PIN);
-        fn_led_of(LED_T_BLU_PIN);
-        fn_led_of(LED_Y_BLU_PIN);
-        fn_led_on(LED_P_BLU_PIN);
-        fn_led_on(LED_Q_RED_PIN);
-        fn_led_on(LED_P_RED_PIN);
+        fn_led_of(LED_BLUE);
     } else if (state & (1L << _FL3))
     {
-        // B_**_ R*..*
-        fn_led_of(LED_Q_BLU_PIN);
-        fn_led_on(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_of(LED_P_BLU_PIN);
-        fn_led_on(LED_Q_RED_PIN);
-        fn_led_on(LED_P_RED_PIN);
+        fn_led_of(LED_BLUE);
     } else if (state & (1L << _FL2))
     {
-        // B*__* R_.._
-        fn_led_on(LED_Q_BLU_PIN);
-        fn_led_of(LED_T_BLU_PIN);
-        fn_led_of(LED_Y_BLU_PIN);
-        fn_led_on(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
+        if (is_keyboard_left())
+        {
+            fn_led_of(LED_BLUE);
+        } else {
+            fn_led_on(LED_BLUE);
+        }
+
     } else if (state & (1L << _FL1))
     {
-        // B_**_ R_.._
-        fn_led_of(LED_Q_BLU_PIN);
-        fn_led_on(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_of(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
+        if (is_keyboard_left())
+        {
+            fn_led_on(LED_BLUE);
+        } else {
+            fn_led_of(LED_BLUE);
+        }
     } else // No-Fn pressed
     {
-        // B**** R_.._
-        fn_led_on(LED_Q_BLU_PIN);
-        fn_led_on(LED_T_BLU_PIN);
-        fn_led_on(LED_Y_BLU_PIN);
-        fn_led_on(LED_P_BLU_PIN);
-        fn_led_of(LED_Q_RED_PIN);
-        fn_led_of(LED_P_RED_PIN);
+        fn_led_on(LED_BLUE);
     }
-    return state ;
+}
+
+// Continuous LED on/off indicates highest active layer for every slave matrix scan
+void matrix_slave_scan_user(void) {
+    matrix_scan_user();
 }
 
 // define macro actions for mouse keys

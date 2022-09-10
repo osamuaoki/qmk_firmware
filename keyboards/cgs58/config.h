@@ -174,8 +174,8 @@
 // no reentering
 //#define DYNAMIC_MACRO_NO_NESTING
 
-// COMBO Q+P for MO(_FN5)
-//#define COMBO_COUNT 1
+// COMBO P+Q for QK_BOOT etc.
+#define COMBO_COUNT 3
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 // in col2row col is input, and row is output
@@ -193,15 +193,94 @@
 #define SERIAL_USART_TX_PIN SOFT_SERIAL_PIN     // USART TX pin
 
 #define SELECT_SOFT_SERIAL_SPEED 1 // or 0, 2, 3, 4, 5
-                                   //  0: 460800 baud
+                                   //  0: 460800 baud (experimental only)
                                    //  1: 230400 baud (default)
                                    //  2: 115200 baud
                                    //  3: 57600 baud
                                    //  4: 38400 baud
                                    //  5: 19200 baud
-#define SERIAL_USART_DRIVER SD1    // USART driver of TX and RX pin. default: SD1
+#define SERIAL_USART_DRIVER SD1    // USART driver of 
+                                   //
+                                   // TX and RX pin. default: SD1
 #define SERIAL_USART_TX_PAL_MODE 7 // Pin "alternate function", see the respective datasheet for the appropriate values for your MCU. default: 7
 #define SERIAL_USART_RX_PAL_MODE 7 // Pin "alternate function", see the respective datasheet for the appropriate values for your MCU. default: 7
 #define SERIAL_USART_TIMEOUT 20    // USART driver timeout. default 20
 
+// Communication Options
+//  -- taken from https://github.com/qmk/qmk_firmware/blob/master/docs/feature_split_keyboard.md
+
+#define FORCED_SYNC_THROTTLE_MS 100
+// This sets the maximum number of milliseconds before forcing a
+// synchronization of data from master to slave. Under normal circumstances
+// this sync occurs whenever the data changes, for safety a data transfer
+// occurs after this number of milliseconds if no change has been detected
+// since the last sync.
+
+#define SPLIT_MAX_CONNECTION_ERRORS 10
+// This sets the maximum number of failed communication attempts (one per scan
+// cycle) from the master part before it assumes that no slave part is
+// connected. This makes it possible to use a master part without the slave
+// part connected.
+//
+// Set to 0 to disable the disconnection check altogether.
+
+#define SPLIT_CONNECTION_CHECK_TIMEOUT 500
+// How long (in milliseconds) the master part should block all connection
+// attempts to the slave after the communication has been flagged as
+// disconnected (see SPLIT_MAX_CONNECTION_ERRORS above).
+//
+// One communication attempt will be allowed everytime this amount of time has
+// passed since the last attempt. If that attempt succeeds, the communication
+// is seen as working again.
+//
+// Set to 0 to disable this throttling of communications while disconnected.
+// This can save you a couple of bytes of firmware size.
+//
+// Data Sync Options The following sync options add overhead to the split
+// communication protocol and may negatively impact the matrix scan speed when
+// enabled. These can be enabled by adding the chosen option(s) to your
+// config.h file.
+
+#define SPLIT_TRANSPORT_MIRROR
+// This mirrors the master side matrix to the slave side for features that
+// react or require knowledge of master side key presses on the slave side.
+// The purpose of this feature is to support cosmetic use of key events (e.g.
+// RGB reacting to keypresses).
+
+#define SPLIT_LAYER_STATE_ENABLE
+// This enables syncing of the layer state between both halves of the split
+// keyboard. The main purpose of this feature is to enable support for use of
+// things like OLED display of the currently active layer.
+
+#define SPLIT_LED_STATE_ENABLE
+// This enables syncing of the Host LED status (caps lock, num lock, etc)
+// between both halves of the split keyboard. The main purpose of this feature
+// is to enable support for use of things like OLED display of the Host LED
+// status.
+
+//#define SPLIT_MODS_ENABLE
+// This enables transmitting modifier state (normal, weak and oneshot) to the
+// non primary side of the split keyboard. The purpose of this feature is to
+// support cosmetic use of modifer state (e.g. displaying status on an OLED
+// screen).
+
+//#define SPLIT_WPM_ENABLE
+// This enables transmitting the current WPM to the slave side of the split
+// keyboard. The purpose of this feature is to support cosmetic use of WPM
+// (e.g. displaying the current value on an OLED screen).
+
+//#define SPLIT_OLED_ENABLE
+// This enables transmitting the current OLED on/off status to the slave side
+// of the split keyboard. The purpose of this feature is to support state
+// (on/off state only) syncing.
+
+// #define SPLIT_ST7565_ENABLE
+// This enables transmitting the current ST7565 on/off status to the slave
+// side of the split keyboard. The purpose of this feature is to support state
+// (on/off state only) syncing.
+
+// #define SPLIT_POINTING_ENABLE
+// This enables transmitting the pointing device status to the master side of
+// the split keyboard. The purpose of this feature is to enable use pointing
+// devices on the slave side.
 

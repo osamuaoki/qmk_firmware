@@ -1,4 +1,4 @@
-# The minimal finger stress keymap for cgc56
+# The minimal finger stress keymap for cgs58
 
 
 

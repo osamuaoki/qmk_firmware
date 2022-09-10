@@ -6,7 +6,7 @@
 
 * Keyboard Maintainer: [Osamu Aoki <osamu@debian.org>](https://github.com/osamuaoki)
 * Hardware Supported: blackpill
-* Hardware Availability: https://github.com/osamuaoki/cg56 (rev#3)
+* Hardware Availability: https://github.com/osamuaoki/cg56 (TBD) https://osamuaoki.github.io/jp/2022/09/01/blackpill-4/
 
 Make example for this keyboard (after setting up your build environment):
 
@@ -23,8 +23,9 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 Enter the bootloader in 3 ways:
 
 * **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
-* **Keycode in layout**: Press the key mapped to `RESET` if it is available
+* **Physical reset button**: Briefly press the button on the back of the PCB -- for cgs58, there are 2 buttons involved.
+  * Push `BOOT0` --> Push `RESET` --> Release `RESET` --> Release `BOOT0`.
+* **Keycode in layout**: Press the key mapped to `RESET` if it is available -- for cgs58, combo of Q-P
 
 ## Reference
 
