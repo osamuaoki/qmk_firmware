@@ -12,8 +12,8 @@
 //
 enum layer_names {
     _BL1, // QWERTY base
-    _FL1, // Layer: F1-F12  1-0, symbols
-    _FL2, // cursor
+    _FL1, // Layer: F1-F12  1-0, symbols         -- transient
+    _FL2, // cursor                              -- lockable and transient
     _FL3, // numpad                              -- lockable
     _FL4, // mouse  (internal, macro)            -- lockable
 };
@@ -21,7 +21,8 @@ enum layer_names {
 // All custom keycodes are after SAFE_RANGE
 enum custom_keycodes {
     // lock-layers
-    CK_LL3 = SAFE_RANGE,
+    CK_LL2 = SAFE_RANGE,
+    CK_LL3,
     CK_LL4,
     // unlock lock-layers
     CK_UNLK,
@@ -131,17 +132,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
      * │F11│F1 │F2 │F3 │F4 │F5 │   │               │   │F6 │F7 │F8 │F9 │F10│F12│
      * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
-     * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │   │               │   │ 6 │ 7 │ 8 │ 9 │ 0 │LL3│
+     * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │   │               │   │ 6 │ 7 │ 8 │ 9 │ 0 │Ent│
      * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
-     * │App│ ` │NUB│ー │ - │ = │   │               │   │ [ │ ] │ \ │ろ │ ' │LL4│
+     * │App│ ` │NUB│ー │ - │ = │   │               │   │ [ │ ] │ \ │ろ │ ' │LL2│
      * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │NUH│vvv│   │   │       │   │   │vvv│KAN│   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL1] = LAYOUT(
             KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX,                   XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX,                   XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    CK_LL3,
-            KC_APP,  KC_GRV,  KC_NUBS, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX,                   XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL4,
+            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX,                   XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    KC_ENT,
+            KC_APP,  KC_GRV,  KC_NUBS, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX,                   XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL2,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NUHS, vvvvvvv, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, vvvvvvv, KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
@@ -149,20 +150,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * _FL2
      * Cursor
      * ┌───┬───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┬───┐
-     * │   │   │   │   │App│   │   │               │   │Ins│PgU│Up │PgD│Del│   │
+     * │   │   │   │   │App│   │   │               │   │Ins│PgU│Up │PgD│Del│LL4│
      * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
-     * │   │Sft│Ctl│Alt│Gui│   │   │               │   │Hom│Lft│Dow│Rgt│End│   │
+     * │   │Sft│Ctl│Alt│Gui│   │   │               │   │Hom│Lft│Dow│Rgt│End│LL3│
      * ├───┼───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │Gui│vvv│   │   │               │   │cU │aP │Tab│aN │cR │   │
+     * │   │   │   │Gui│vvv│   │   │               │   │cU │aP │Tab│aN │cR │LL2│
      * ├───┼───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   │Spc│   │   │       │   │   │Spc│   │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL2] = LAYOUT(
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                   XXXXXXX, KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  XXXXXXX,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  XXXXXXX,
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, vvvvvvv, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, XXXXXXX,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX,                   XXXXXXX, KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  CK_LL4,
+            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  CK_LL3,
+            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, vvvvvvv, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, CK_UNLK,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
@@ -285,6 +286,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_UNLK:
             if (record->event.pressed)
             {
+                layer_off(_FL2);
+                layer_off(_FL3);
+                layer_off(_FL4);
+            }
+            return false;
+
+        case CK_LL2:
+            if (record->event.pressed)
+            {
+                layer_on(_FL2);
                 layer_off(_FL3);
                 layer_off(_FL4);
             }
@@ -293,6 +304,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_LL3:
             if (record->event.pressed)
             {
+                layer_off(_FL2);
                 layer_on(_FL3);
                 layer_off(_FL4);
             }
@@ -301,6 +313,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_LL4:
             if (record->event.pressed)
             {
+                layer_off(_FL2);
                 layer_on(_FL4);
                 layer_off(_FL3);
             }
@@ -388,7 +401,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM * 2;
         // LT are fast
         case LT(_FL1, KC_SPC):
-        case LT(_FL2, KC_B):
+        case LT(_FL2, KC_V):
             return TAPPING_TERM * 3 / 4;
         // MT are normal
         default:
