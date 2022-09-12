@@ -11,11 +11,11 @@
 #define PRODUCT_ID   0x0000
 #define DEVICE_VER   0x0001
 #define MANUFACTURER osamuaoki
-#define PRODUCT      cgs58
+#define PRODUCT      cgs50
 
 /* key matrix size */
 #define MATRIX_ROWS 8  // Rows are doubled-up
-#define MATRIX_COLS 8
+#define MATRIX_COLS 7
 
 /*
  * Keyboard Matrix Assignments
@@ -30,10 +30,10 @@
 
 // A9-A12 can't be used (USB conflict) for I/O
 #define MATRIX_ROW_PINS { B12, B13, B14, B15 }
-#define MATRIX_COL_PINS { A8, B8, B3, A15, B9, B4, B5, C14 }
+#define MATRIX_COL_PINS { B8, B3, A15, B9, B4, B5, C14 }
 
 #define MATRIX_ROW_PINS_RIGHT { B12, B13, B14, B15 }
-#define MATRIX_COL_PINS_RIGHT { A6, A3, A2, A1, A4, A5, C15, C14 }
+#define MATRIX_COL_PINS_RIGHT { A6, A3, A2, A1, A4, A5, C15 }
 //#define UNUSED_PINS
 
 /* COL2ROW, ROW2COL */

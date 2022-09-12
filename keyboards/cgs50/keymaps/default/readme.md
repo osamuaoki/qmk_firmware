@@ -1,2 +1,2 @@
-# The default keymap for cgg56
+# The default keymap for cgs50
 
