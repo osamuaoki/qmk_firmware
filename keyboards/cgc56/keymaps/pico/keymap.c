@@ -118,10 +118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
     [_BL1] = LAYOUT(
-            KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_F5,   KC_F10,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-            LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_F6,   KC_F9,   RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
-            LS_MUTE, KC_Z,    KC_X,    LG_C,    K2_V,    KC_B,    KC_F7,   KC_F8,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
-            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_INT5, K1_SPC,  KC_INS,  KC_DEL,  K1_SPC,  KC_INT4, CK_LL3,  CK_LL4,  KC_F11,  KC_F12
+            KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_PGUP, KC_PGDN, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+            LC_ESC,  LS_A,    LC_S,    LA_D,    LG_F,    RA_G,    KC_LEFT, KC_RGHT, RA_H,    LG_J,    LA_K,    RC_L,    RS_SCLN, KC_ENT,
+            LS_MUTE, KC_Z,    KC_X,    LG_C,    K2_V,    KC_B,    KC_UP,   KC_DOWN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_PSCR,
+            KC_LCTL, KC_LGUI, KC_LSFT, KC_LALT, KC_INT5, K1_SPC,  KC_INS,  KC_DEL,  K1_SPC,  KC_INT4, KC_RALT, KC_RSFT, KC_RGUI, KC_RCTL
             ),
 
     /* ****************************************************************************************************************************************
@@ -143,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_FL1] = LAYOUT(
             KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   XXXXXXX, XXXXXXX, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    XXXXXXX, XXXXXXX, RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    KC_ENT,
+            KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,    KC_HOME, KC_END,  RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    KC_ENT,
             KC_APP,  KC_GRV,  KC_NUBS, KC_INT3, KC_MINS, KC_EQL,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL2,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NUHS, vvvvvvv, XXXXXXX, XXXXXXX, vvvvvvv, KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
