@@ -10,8 +10,8 @@
 //#define VENDOR_ID    0xFEED
 //#define PRODUCT_ID   0x0000
 //#define DEVICE_VER   0x0001
-//#define MANUFACTURER osamuaoki
-//#define PRODUCT      cgc56
+//#define MANUFACTURER "osamuaoki"
+//#define PRODUCT      "cgc56"
 
 /* key matrix size */
 //#define MATRIX_ROWS 8
