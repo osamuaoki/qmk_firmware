@@ -164,7 +164,7 @@
 // right top row = 4
 #define BOOTMAGIC_LITE_ROW_RIGHT    4
 // right most column = 15
-#define BOOTMAGIC_LITE_COLUMN_RIGHT 15
+#define BOOTMAGIC_LITE_COLUMN_RIGHT 6
 
 // auto shift
 //#define AUTO_SHIFT_TIMEOUT 150
