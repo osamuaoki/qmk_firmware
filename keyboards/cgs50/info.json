@@ -1,5 +1,11 @@
 {
-    "keyboard_name": "cgs58",
-    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgs58",
+    "keyboard_name": "cgs50",
+    "manufacturer":"osamuaoki",
+    "url": "https://github.com/osamuaoki/qmk_firmware/tree/osamu1/keyboards/cgs50",
     "maintainer": "Osamu Aoki <osamu@debian.org>",
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0x0000",
+        "device_ver": "0x0002"
+    },
 }
