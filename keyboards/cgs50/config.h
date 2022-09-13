@@ -10,8 +10,8 @@
 #define VENDOR_ID    0xFEED
 #define PRODUCT_ID   0x0000
 #define DEVICE_VER   0x0001
-#define MANUFACTURER osamuaoki
-#define PRODUCT      cgs50
+#define MANUFACTURER "osamuaoki"
+#define PRODUCT      "cgs50"
 
 /* key matrix size */
 #define MATRIX_ROWS 8  // Rows are doubled-up
