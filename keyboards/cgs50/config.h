@@ -284,3 +284,4 @@
 // the split keyboard. The purpose of this feature is to enable use pointing
 // devices on the slave side.
 
+#define KEYMAP_CONFIG_RAM
