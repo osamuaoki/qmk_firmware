@@ -188,3 +188,5 @@
 #define COMBO_COUNT 3
 
 #define DEBUG_ACTION
+
+#define KEYMAP_CONFIG_RAM
