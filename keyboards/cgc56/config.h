@@ -189,4 +189,27 @@
 
 #define DEBUG_ACTION
 
+// Delay between pressing a movement key and cursor movement
+//#define MOUSEKEY_DELAY                        10
+#define MOUSEKEY_DELAY	                        10
+// Time between cursor movements in milliseconds
+//#define MOUSEKEY_INTERVAL	20
+#define MOUSEKEY_INTERVAL	5
+// Step size
+//#define MOUSEKEY_MOVE_DELTA	8
+#define MOUSEKEY_MOVE_DELTA	1
+// Maximum cursor speed at which acceleration stops
+//#define MOUSEKEY_TIME_TO_MAX	30
+#define MOUSEKEY_TIME_TO_MAX	200
+// Time until maximum cursor speed is reached
+#define MOUSEKEY_MAX_SPEED	10
+// Delay between pressing a wheel key and wheel movement
+#define MOUSEKEY_WHEEL_DELAY	10
+// Time between wheel movements
+#define MOUSEKEY_WHEEL_INTERVAL	80
+// Maximum number of scroll steps per scroll action
+#define MOUSEKEY_WHEEL_MAX_SPEED	8
+// Time until maximum scroll speed is reached
+#define MOUSEKEY_WHEEL_TIME_TO_MAX              40
+
 #define KEYMAP_CONFIG_RAM
