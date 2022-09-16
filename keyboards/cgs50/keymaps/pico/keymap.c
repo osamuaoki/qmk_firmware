@@ -134,44 +134,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
      * │Cap│ 1 │ 2 │ 3 │ 4 │ 5 │               │ 6 │ 7 │ 8 │ 9 │ 0 │App│
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
-     * │NUB│ ` │NUH│ー │ - │ = │               │ [ │ ] │ \ │ろ │ ' │LL2│
+     * │NUB│ ` │NUH│ー │ - │ = │               │ [ │ ] │ \ │ろ │ ' │   │
      * ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   │vvv│   │       │   │vvv│KAN│   │   │   │   │
+     * │   │   │   │   │LL2│LL3│   │       │   │LL4│KAN│   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL1] = LAYOUT(
             KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
             KC_CAPS, LS_1,    LC_2,    LA_3,    LG_4,    RA_5,                      RA_6,    LG_7,    LA_8,    RC_9,    RS_0,    KC_APP,
-            KC_NUBS, KC_GRV,  KC_NUHS, KC_INT3, KC_MINS, KC_EQL,                    KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, CK_LL2,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, vvvvvvv, XXXXXXX, XXXXXXX, vvvvvvv, KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            KC_NUBS, KC_GRV,  KC_NUHS, KC_INT3, KC_MINS, KC_EQL,                    KC_LBRC, KC_RBRC, KC_BSLS, KC_INT1, KC_QUOT, XXXXXXX,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_LL2,  CK_LL3,  XXXXXXX, XXXXXXX, CK_LL4,  KC_INT2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * _FL2
      * Cursor
      * ┌───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┐
-     * │   │   │   │   │App│   │               │Ins│PgU│Up │PgD│Del│LL4│
+     * │Tab│   │   │   │App│   │               │Ins│PgU│Up │PgD│Del│BS │
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
-     * │   │Sft│Ctl│Alt│Gui│   │               │Hom│Lft│Dow│Rgt│End│LL3│
+     * │Esc│Sft│Ctl│Alt│Gui│   │               │Hom│Lft│Dow│Rgt│End│Ent│
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
-     * │   │   │   │Gui│vvv│   │               │cU │aP │Tab│aN │cR │LL2│
+     * │   │   │   │Gui│UNL│   │               │cU │aP │Tab│aN │cR │   │
      * ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   │Spc│   │       │   │Spc│   │   │   │   │   │
+     * │   │   │   │   │   │UNL│   │       │   │Spc│   │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
      */
     [_FL2] = LAYOUT(
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX,                   KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  CK_LL4,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                   KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  CK_LL3,
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, vvvvvvv, XXXXXXX,                   KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, CK_UNLK,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+            KC_TAB,  XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX,                   KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  KC_BSPC,
+            KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                   KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_ENT,
+            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, CK_UNLK, XXXXXXX,                   KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, XXXXXXX,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * Numpad (locked layer)
      * ┌───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┐
-     * │   │   │   │Psc│ScL│Pau│               │Num│ 7 │ 8 │ 9 │ * │BS │
+     * │Tab│   │   │Psc│ScL│Pau│               │Num│ 7 │ 8 │ 9 │ * │BS │
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
-     * │   │Sft│Ctl│Alt│Gui│   │               │ / │ 4 │ 5 │ 6 │ + │PEn│
+     * │Esc│Sft│Ctl│Alt│Gui│   │               │ / │ 4 │ 5 │ 6 │ + │PEn│
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │UNL│   │               │ 0 │ 1 │ 2 │ 3 │ - │Cal│
      * ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
@@ -180,20 +180,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * All off-main area (numpad etc.)
      */
     [_FL3] = LAYOUT(
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS,                  KC_NUM,  KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, KC_BSPC,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                  KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PENT,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX,                  KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PMNS, KC_CALC,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK,XXXXXXX, XXXXXXX, KC_PDOT, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
+            KC_TAB,  XXXXXXX, XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS,                   KC_NUM,  KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, KC_BSPC,
+            KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                   KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PENT,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX,                   KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PMNS, KC_CALC,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX, KC_PDOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
     /* ****************************************************************************************************************************************
      * Internal and mouse locked layer: mouse keys are mostly useless
      */
     [_FL4] = LAYOUT(
-            XXXXXXX, EC_SWAP, CK_ON,   NK_ON,   KC_APP,  KC_VOLU,                   KC_BTN3, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_ACL0,
-            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE,                   KC_WH_L, KC_MS_L, KC_BTN1, KC_MS_R, KC_WH_R, KC_ACL1,
-            XXXXXXX, EC_NORM, CK_OFF,  NK_OFF,  CK_UNLK, KC_VOLD,                   KC_BTN2, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_ACL2,
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, XXXXXXX, XXXXXXX, KC_BTN1, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX
+            XXXXXXX, EC_SWAP, XXXXXXX, NK_ON,   KC_APP,  KC_VOLU,                   KC_BTN3, CK_M_UL, KC_MS_U, CK_M_UR, KC_WH_U, KC_BTN1,
+            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_MUTE,                   KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_R, KC_ENT,
+            XXXXXXX, EC_NORM, XXXXXXX, NK_OFF,  CK_UNLK, KC_VOLD,                   KC_BTN2, CK_M_DL, KC_MS_D, CK_M_DR, KC_WH_D, KC_BTN2,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX, KC_BTN1, KC_BTN3, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
 };
