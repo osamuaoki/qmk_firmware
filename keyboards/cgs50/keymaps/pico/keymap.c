@@ -78,11 +78,11 @@ enum custom_keycodes {
 //      KC_INT5  8B                                     無変換
 //
 
-// mc: ALT-P/ALT-N/ALT-ENT/CTL-U/CTL-R
-#define KC_ALTP LALT(KC_P)
-#define KC_ALTN LALT(KC_N)
-#define KC_CTLU LCTL(KC_U)
-#define KC_CTLR LCTL(KC_R)
+// mc and GNOME WM
+#define KC_LA_P LALT(KC_P)
+#define KC_LA_N LALT(KC_N)
+#define KC_LC_U LCTL(KC_U)
+#define KC_LC_R LCTL(KC_R)
 
 // TRANS (pressed)
 #define vvvvvvv KC_TRNS
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
      * │Esc│Sft│Ctl│Alt│Gui│   │               │Hom│Lft│Dow│Rgt│End│Ent│
      * ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
-     * │   │   │   │Gui│UNL│   │               │cU │aP │Tab│aN │cR │   │
+     * │   │   │   │Gui│UNL│   │               │cU │aP │Tab│aN │cR │Esc│
      * ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   │UNL│   │       │   │Spc│   │   │   │   │   │
      * └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FL2] = LAYOUT(
             KC_TAB,  XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX,                   KC_INS,  KC_PGUP, KC_UP,   KC_PGDN, KC_DEL,  KC_BSPC,
             KC_ESC,  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                   KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_ENT,
-            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, CK_UNLK, XXXXXXX,                   KC_CTLU, KC_ALTP, KC_TAB,  KC_ALTN, KC_CTLR, XXXXXXX,
+            XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, CK_UNLK, XXXXXXX,                   KC_LC_U, KC_LA_P, KC_TAB,  KC_LA_N, KC_LC_R, KC_ESC,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_UNLK, CK_UNLK, XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
             ),
 
