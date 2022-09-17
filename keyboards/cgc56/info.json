@@ -6,7 +6,7 @@
     "usb": {
         "vid": "0xFEED",
         "pid": "0x0000",
-        "device_ver": "0x0001"
+        "device_version": "0.0.1"
     },
     "debounce": 5,
     "diode_direction":"COL2ROW",
