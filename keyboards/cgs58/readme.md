@@ -1,5 +1,9 @@
 # cgs58
 
+This is here for the record.
+The actual keyboard was recycled to make cgs50
+
+
 ![cgs58](imgur.com image replace me!)
 
 *Cartesian Grid Split 58 Keyboard*
