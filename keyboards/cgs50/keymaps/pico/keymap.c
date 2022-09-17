@@ -239,15 +239,20 @@ void matrix_scan_user(void) {
     // check from MSB -> LSB
     if (layer_state & (1L << _FL4))
     {   // mouse
-        fn_led(LED_BLUE, flag);
-
-    } else if (layer_state & (1L << _FL3))
-    {   // numpad
         if (is_keyboard_left())
         {
             fn_led(LED_BLUE, true);
         } else {
             fn_led(LED_BLUE, flag);
+        }
+
+    } else if (layer_state & (1L << _FL3))
+    {   // numpad
+        if (is_keyboard_left())
+        {
+            fn_led(LED_BLUE, flag);
+        } else {
+            fn_led(LED_BLUE, true);
         }
 
     } else if (layer_state & (1L << _FL2))
