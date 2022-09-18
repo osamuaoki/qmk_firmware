@@ -296,7 +296,7 @@
 #define MOUSEKEY_MOVE_DELTA	1
 // Maximum cursor speed at which acceleration stops
 //#define MOUSEKEY_TIME_TO_MAX	30
-#define MOUSEKEY_TIME_TO_MAX	200
+#define MOUSEKEY_TIME_TO_MAX	100
 // Time until maximum cursor speed is reached
 #define MOUSEKEY_MAX_SPEED	10
 // Delay between pressing a wheel key and wheel movement
@@ -310,3 +310,17 @@
 
 // Osamu special
 #define KEYMAP_CONFIG_RAM
+
+/* tap term per key */
+#define TAPPING_TERM 300
+#define TAPPING_TERM_PER_KEY
+
+/* Select MOD TAP to behave like default LAYER TAP (non-default) */
+/* This is needed for home position mod keymaps */
+#define IGNORE_MOD_TAP_INTERRUPT
+/* Both LAYER TAP and MOD TAP can be rolling-pressed within TAPPING_TERM */
+/* This is optional to accommodate the fast typer */
+/* This is enabled by default if TAPPING_TERM >= 500 */
+#define PERMISSIVE_HOLD
+
+
