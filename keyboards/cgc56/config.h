@@ -200,7 +200,7 @@
 #define MOUSEKEY_MOVE_DELTA	1
 // Maximum cursor speed at which acceleration stops
 //#define MOUSEKEY_TIME_TO_MAX	30
-#define MOUSEKEY_TIME_TO_MAX	200
+#define MOUSEKEY_TIME_TO_MAX	100
 // Time until maximum cursor speed is reached
 #define MOUSEKEY_MAX_SPEED	10
 // Delay between pressing a wheel key and wheel movement
